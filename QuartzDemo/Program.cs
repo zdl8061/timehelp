@@ -33,17 +33,23 @@ namespace QuartzDemo
 
             #region fluentscheduler 简洁首选
 
-            JobManager.AddJob(() =>
-            {
-                //Do something...
-                Console.WriteLine("Timer task,current time:{0}", DateTime.Now);
-            }, t =>
-            {
-                //每5秒钟执行一次
-                t.ToRunNow().AndEvery(5).Seconds();
-                ////带有任务名称的任务定时器
-                //t.WithName("TaskName").ToRunOnceAt(DateTime.Now.AddSeconds(5));
-            });
+            //最简单写法
+            //JobManager.AddJob(() =>
+            //{
+            //    //Do something...
+            //    Console.WriteLine("Timer task,current time:{0}", DateTime.Now);
+            //}, t =>
+            //{
+            //    //每5秒钟执行一次
+            //    t.ToRunNow().AndEvery(5).Seconds();
+
+            //    ////带有任务名称的任务定时器
+            //    //t.WithName("TaskName").ToRunOnceAt(DateTime.Now.AddSeconds(5));
+            //});
+
+            //初始化 如果web端这句加到global中 并防IIS回收
+            JobManager.Initialize(new Demo());
+
 
             #endregion
 
